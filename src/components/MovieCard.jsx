@@ -13,7 +13,7 @@ function MovieCard({movie}) {
         alt={movie.id}
       />
       <div>
-        <Link to = "movie/${movie.id}">
+        <Link to = {`movie/${movie.id}`}>
         <h4><strong>Title: </strong>{movie.title}</h4>
         </Link>
         <p>ReleaseDate: {movie.release_date}</p>
