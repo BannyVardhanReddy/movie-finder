@@ -8,18 +8,22 @@ function MovieDetailedPage(){
 
     const {id} = useParams();
     useEffect(()=>{
-        setLoading(true);
-        setError(null);
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`)
-        .then((data) => data.json())
-        .then((response) => setData(response))
-        .catch(()=>{
-            setError("Error..")
-        })
-        .finally(()=>{
-            setLoading(false);
-        })
-        // console.log(data);
+        async function fetchData() {
+            try{
+                setLoading(true);
+            setError(null);
+            const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_API_KEY}`);
+            const data = await res.json();
+
+            setData(data);
+            }catch{
+              setError("Error..")
+            }finally{
+              setLoading(false);
+            }
+        }
+
+        fetchData();
     },[id])
     console.log(data);
     if(loading){
