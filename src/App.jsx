@@ -3,6 +3,7 @@ import { useState } from "react";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import MovieDetailedPage from "./pages/MovieDetailedPage";
+import "./App.css";
 function App(){
   const [movies,setMovies] = useState([]);
   const [loading,setLoading] = useState(false);
@@ -35,7 +36,11 @@ function App(){
 
   return(
     <BrowserRouter>
-      <NavBar handleSearch = {handleSearch}/>
+      <header>
+        <h1>Movie Finder</h1>
+        <p>Search, browse, and revisit your favorite films.</p>
+        <NavBar handleSearch = {handleSearch}/>
+      </header>
       <Routes>
         <Route path = "/" element = {<HomePage movies = {movies} error = {error} loading = {loading}  />}></Route>
         <Route path = "/movie/:id" element = {<MovieDetailedPage />} />
