@@ -29,29 +29,45 @@ function MovieDetailedPage() {
   }, [id]);
   console.log(data);
   if (loading) {
-    return <h1>loading...</h1>;
+    return (
+      <main className="page-shell">
+        <section className="state-box">
+          <h2>Loading Movie Details</h2>
+        </section>
+      </main>
+    );
   }
 
   if (error) {
-    return <h1>Error..</h1>;
+    return (
+      <main className="page-shell">
+        <section className="state-box">
+          <h2>Failed To Load Movie</h2>
+        </section>
+      </main>
+    );
   }
   if (!data) {
     return null;
   }
   return (
-    <div>
-      <img
-        src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
-        alt={data.title}
-      />
-      <h1>{data.title}</h1>
-      <p>{data.tagline}</p>
-      <p>{data.overview}</p>
-      <p>Rating: {data.vote_average}</p>
-      <p>Runtime: {data.runtime} mins</p>
-      <p>Release date: {data.release_date}</p>
-      <p>Genres: {data.genres.map((g) => g.name).join(", ")}</p>
-    </div>
+    <main className="page-shell">
+      <article className="movie-detail-card">
+        <img
+          src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
+          alt={data.title}
+        />
+        <div className="movie-detail-content">
+          <h2>{data.title}</h2>
+          <p className="tagline">{data.tagline}</p>
+          <p>{data.overview}</p>
+          <p><strong>Rating:</strong> {data.vote_average}</p>
+          <p><strong>Runtime:</strong> {data.runtime} mins</p>
+          <p><strong>Release Date:</strong> {data.release_date}</p>
+          <p><strong>Genres:</strong> {data.genres.map((g) => g.name).join(", ")}</p>
+        </div>
+      </article>
+    </main>
   );
 }
 
